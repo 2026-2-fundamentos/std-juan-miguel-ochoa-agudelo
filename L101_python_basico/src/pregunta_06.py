@@ -1,3 +1,5 @@
+from ._data import parse_metrics, read_rows
+
 def pregunta_06():
     """
     La quinta columna (`metrics`) contiene pares `clave:valor` separados por
@@ -13,4 +15,12 @@ def pregunta_06():
         [("aaa", 1, 9), ("bbb", 1, 9), ...]
     """
 
-    raise NotImplementedError
+    ranges = {}
+    for row in read_rows():
+        for key, value in parse_metrics(row[4]):
+            if key not in ranges:
+                ranges[key] = [value, value]
+            else:
+                ranges[key][0] = min(ranges[key][0], value)
+                ranges[key][1] = max(ranges[key][1], value)
+    return [(key, low, high) for key, (low, high) in sorted(ranges.items())]

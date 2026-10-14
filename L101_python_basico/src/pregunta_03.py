@@ -1,3 +1,5 @@
+from ._data import read_rows
+
 def pregunta_03():
     """
     Sume los valores de la segunda columna (`value`) para cada letra de la
@@ -9,4 +11,8 @@ def pregunta_03():
         [("A", 53), ("B", 36), ("C", 27), ...]
     """
 
-    raise NotImplementedError
+    totals = {}
+    for row in read_rows():
+        letter, value = row[0], int(row[1])
+        totals[letter] = totals.get(letter, 0) + value
+    return sorted(totals.items())

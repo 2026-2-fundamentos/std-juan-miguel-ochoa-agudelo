@@ -1,3 +1,6 @@
+from ._data import parse_metrics, read_rows
+from collections import Counter
+
 def pregunta_09():
     """
     Cuente cuántas veces aparece cada clave en la quinta columna (`metrics`)
@@ -9,4 +12,5 @@ def pregunta_09():
         {"aaa": 13, "bbb": 16, "ccc": 23, ...}
     """
 
-    raise NotImplementedError
+    counts = Counter(key for row in read_rows() for key, _ in parse_metrics(row[4]))
+    return dict(sorted(counts.items()))

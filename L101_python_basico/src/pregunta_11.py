@@ -1,3 +1,5 @@
+from ._data import read_rows
+
 def pregunta_11():
     """
     La cuarta columna (`codes`) contiene letras minúsculas separadas por
@@ -10,4 +12,9 @@ def pregunta_11():
         {"a": 122, "b": 49, "c": 91, ...}
     """
 
-    raise NotImplementedError
+    totals = {}
+    for row in read_rows():
+        value = int(row[1])
+        for code in set(row[3].split(",")):
+            totals[code] = totals.get(code, 0) + value
+    return dict(sorted(totals.items()))

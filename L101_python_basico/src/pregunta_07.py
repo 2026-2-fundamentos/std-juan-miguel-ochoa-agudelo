@@ -1,3 +1,6 @@
+from ._data import read_rows
+from collections import defaultdict
+
 def pregunta_07():
     """
     Para cada valor distinto de la segunda columna (`value`), construya la
@@ -11,4 +14,7 @@ def pregunta_07():
         [(0, ["C"]), (1, ["E", "B", "E"]), (2, ["A", "E"]), ...]
     """
 
-    raise NotImplementedError
+    letters_by_value = defaultdict(list)
+    for row in read_rows():
+        letters_by_value[int(row[1])].append(row[0])
+    return sorted(letters_by_value.items())

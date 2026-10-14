@@ -1,3 +1,6 @@
+from ._data import read_rows
+from collections import Counter
+
 def pregunta_04():
     """
     Cuente cuántos registros hay en cada mes, usando la fecha de la tercera
@@ -9,4 +12,5 @@ def pregunta_04():
         [("01", 3), ("02", 4), ("03", 2), ...]
     """
 
-    raise NotImplementedError
+    counts = Counter(row[2][5:7] for row in read_rows())
+    return sorted(counts.items())
