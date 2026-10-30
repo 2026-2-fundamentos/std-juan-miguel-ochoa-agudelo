@@ -1,3 +1,6 @@
+from ._data import read_table
+
+
 def pregunta_09():
     """
     Retorne la tabla `data/tbl0.tsv` completa con una columna adicional
@@ -13,4 +16,6 @@ def pregunta_09():
         ...
     """
 
-    raise NotImplementedError
+    table = read_table("tbl0.tsv")
+    table["year"] = table["c3"].str[:4]
+    return table

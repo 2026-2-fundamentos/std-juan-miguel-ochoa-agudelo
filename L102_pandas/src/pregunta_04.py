@@ -1,3 +1,6 @@
+from ._data import read_table
+
+
 def pregunta_04():
     """
     Usando `data/tbl0.tsv`, calcule el promedio de la columna `c2` para cada
@@ -13,4 +16,4 @@ def pregunta_04():
         ...
     """
 
-    raise NotImplementedError
+    return read_table("tbl0.tsv").groupby("c1")["c2"].mean().sort_index()

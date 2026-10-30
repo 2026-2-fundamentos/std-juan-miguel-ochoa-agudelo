@@ -1,3 +1,6 @@
+from ._data import read_table
+
+
 def pregunta_12():
     """
     En `data/tbl2.tsv`, cada valor de la columna `c0` aparece en varias
@@ -15,4 +18,9 @@ def pregunta_12():
         ...
     """
 
-    raise NotImplementedError
+    table = read_table("tbl2.tsv")
+    table["pair"] = table["c5a"] + ":" + table["c5b"].astype(str)
+    values = table.groupby("c0")["pair"].apply(
+        lambda items: ",".join(sorted(items))
+    )
+    return values.rename("c5").reset_index()

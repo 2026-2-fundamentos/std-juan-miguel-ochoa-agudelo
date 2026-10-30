@@ -1,3 +1,6 @@
+from ._data import read_table
+
+
 def pregunta_10():
     """
     Usando `data/tbl0.tsv`, construya para cada categoría de la columna `c1`
@@ -15,4 +18,8 @@ def pregunta_10():
         ...
     """
 
-    raise NotImplementedError
+    table = read_table("tbl0.tsv")
+    values = table.groupby("c1")["c2"].apply(
+        lambda items: ":".join(str(value) for value in sorted(items))
+    )
+    return values.to_frame(name="c2")
